@@ -1,18 +1,20 @@
-const initialState = {
-  todoList: [],
-};
+export const TODO_KEY = 'todoStore';
 
-const todoListReducer = (state = initialState, action) => {
+const initialState = [];
+
+export const todoReducers = (state = initialState, action) => {
+  let newTodos;
   switch (action.type) {
-    case 'ADDITEM':
-      return {
-        ...state,
-        todoList: action.payload,
-      };
+    case 'LOAD_TODO':
+      newTodos = [...state];
+      newTodos.push(action.payload);
+      return newTodos;
 
+    case 'DELETE_TODO':
+      newTodos = [...state];
+      newTodos = newTodos.filter((item) => item.id !== action.payload);
+      return newTodos;
     default:
       return state;
   }
 };
-
-export default todoListReducer;
