@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadTodo } from '../redux/todo/todoAction';
+import { loadTodo, deleteTodo } from '../redux/todo/todoAction';
 import { TODO_KEY } from '../redux/todo/todoReducer';
 import { v4 } from 'uuid';
 
@@ -39,6 +39,11 @@ const Todo = () => {
     return state[TODO_KEY];
   });
 
+  //handle delete
+  const handleDelete = (id) => {
+    dispatch(deleteTodo(id));
+  };
+
   return (
     <>
       <div>
@@ -65,6 +70,7 @@ const Todo = () => {
               <ul>
                 <li>{todo.todoItem.myText}</li>
               </ul>
+              <button onClick={() => handleDelete(todo.id)}>delete</button>
             </div>
           );
         })}
