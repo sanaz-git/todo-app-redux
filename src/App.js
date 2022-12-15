@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import Todo from './components/Todo';
 
 //Store
-import store from './redux/store';
+import { store } from './redux/store';
 
 function App() {
   return (
