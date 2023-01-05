@@ -13,8 +13,8 @@
 .inputContainer {
   border: none;
   box-shadow: 0 0 5px 0 rgb(0 0 0 / 10%);
-  width: 300px;
-  padding: 10px;
+  width: 50%;
+  padding: 7px;
   margin-top: 30px;
   font-family: zen loop, cursive;
 }
@@ -22,7 +22,7 @@
 .todoContainer {
   background-color: #f8f8f8;
   border-radius: 0 0 10px 10px;
-  margin: 50px 250px 0 250px;
+  margin-top: 50px;
   min-height: 300px;
 }
 
@@ -55,6 +55,25 @@
   font-family: zen loop, cursive;
 }
 
-.deleteButton {
-  margin-right: 40px;
+@media (max-width: 610px) {
+  .inputContainer {
+    width: 300px;
+  }
+}
+
+@media (max-width: 360px) {
+  .inputContainer {
+    width: 250px;
+  }
+}
+
+@media (max-width: 900px) {
+  .listContainer ul li {
+    width: 300px;
+  }
+}
+@media (max-width: 750px) {
+  .listContainer ul li {
+    width: 200px;
+  }
 }
