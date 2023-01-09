@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadTodo, deleteTodo } from '../redux/todo/todoAction';
+import { loadTodo, deleteTodo, editTodo } from '../redux/todo/todoAction';
 import { TODO_KEY } from '../redux/todo/todoReducer';
 import { v4 } from 'uuid';
 import { BsPlusLg } from 'react-icons/bs';
@@ -48,6 +48,11 @@ const Todo = () => {
     dispatch(deleteTodo(id));
   };
 
+  // //handle edit
+  const handleEdit = (id) => {
+    dispatch(editTodo(id));
+  };
+
   return (
     <>
       <div className={styles.todoContainer}>
@@ -78,11 +83,19 @@ const Todo = () => {
                 <ul>
                   <li>{todo.todoItem.myText}</li>
                 </ul>
+                {/* delete */}
                 <button
                   onClick={() => handleDelete(todo.id)}
                   className={styles.deleteButton}
                 >
                   <BiMinus />
+                </button>
+                {/* edit */}
+                <button
+                  onClick={() => handleEdit(todo.id)}
+                  className={styles.editButton}
+                >
+                  edit
                 </button>
               </div>
             );

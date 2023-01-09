@@ -34,6 +34,14 @@
   color: rgb(6, 94, 57);
   font-weight: bolder;
 }
+.todoContainer .editButton {
+  border-radius: 5px;
+  border: 3px solid rgb(6, 94, 57);
+  height: 35px;
+  background-color: white;
+  color: rgb(6, 94, 57);
+  font-weight: bolder;
+}
 
 .listContainer {
   display: flex;
