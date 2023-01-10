@@ -1,9 +1,4 @@
-import {
-  LOAD_TODO,
-  DELETE_TODO,
-  EDIT_TODO,
-  UPDATE_TODO,
-} from './todo.actionTypes';
+import { LOAD_TODO, DELETE_TODO, UPDATE_TODO } from './todo.actionTypes';
 
 const loadTodo = (todos) => {
   return {
@@ -19,18 +14,10 @@ const deleteTodo = (id) => {
   };
 };
 
-const editTodo = (todo, id) => {
-  return {
-    type: EDIT_TODO,
-    payload: id,
-    title: todo,
-  };
-};
-
-const updateTodo = (todo) => {
+const handleEditSubmit = (todo) => {
   return {
     type: UPDATE_TODO,
     payload: todo,
   };
 };
-export { loadTodo, deleteTodo, editTodo, updateTodo };
+export { loadTodo, deleteTodo, handleEditSubmit };

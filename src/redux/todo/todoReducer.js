@@ -1,9 +1,4 @@
-import {
-  LOAD_TODO,
-  DELETE_TODO,
-  EDIT_TODO,
-  UPDATE_TODO,
-} from './todo.actionTypes';
+import { LOAD_TODO, DELETE_TODO, UPDATE_TODO } from './todo.actionTypes';
 
 export const TODO_KEY = 'todoStore';
 
@@ -22,21 +17,17 @@ export const todoReducers = (state = initialState, action) => {
       newTodos = newTodos.filter((item) => item.id !== action.payload);
       return newTodos;
 
-    case EDIT_TODO:
-      newTodos = [...state];
-      newTodos = newTodos.find((todo) => todo.id === action.payload.id);
-
     case UPDATE_TODO:
-      newTodos = [...state];
-      newTodos = newTodos.map((todo) => {
-        if (todo.id === action.payload.id) {
-          return {
-            ...todo,
-            title: action.payload.title,
-          };
+      let data = action.payload;
+      const updatedArray = [];
+      state.map((item) => {
+        if (item.id === data.id) {
+          item.id = data.id;
+          item.todo = data.todo;
         }
-        return newTodos;
+        updatedArray.push(item);
       });
+      return updatedArray;
 
     default:
       return state;

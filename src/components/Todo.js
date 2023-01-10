@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   loadTodo,
   deleteTodo,
-  editTodo,
-  updateTodo,
+  handleEditSubmit,
 } from '../redux/todo/todoAction';
 import { TODO_KEY } from '../redux/todo/todoReducer';
 import { v4 } from 'uuid';
@@ -21,7 +20,20 @@ const Todo = () => {
     myText: '',
   });
 
-  // const [editTodo, setEditTodo] = useState(null);
+  const [editFormVisibility, setEditFormVisibility] = useState(false);
+
+  const [editTodo, setEditTodo] = useState('');
+
+  const [editValue, setEditValue] = useState('');
+
+  useEffect(() => {
+    setEditValue(editTodo.todo);
+  }, [editTodo]);
+
+  //cancel
+  const cancelUpdate = () => {
+    setEditFormVisibility(false);
+  };
 
   //handle change
   const handleChange = (e) => {
@@ -34,19 +46,26 @@ const Todo = () => {
   //handle onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (dispatch(editTodo())) {
-      dispatch(
-        loadTodo({
-          id: v4(),
-          todoItem: text,
-        }),
-      );
-      setText({
-        myText: '',
-      });
-    } else {
-      dispatch(updateTodo());
-    }
+
+    dispatch(
+      loadTodo({
+        id: v4(),
+        todoItem: text,
+      }),
+    );
+    setText({
+      myText: '',
+    });
+  };
+
+  //handle editSubmit
+  const editSubmit = (e) => {
+    e.preventDefault();
+    let editObj = {
+      id: editTodo.id,
+      todo: editValue,
+    };
+    dispatch(handleEditSubmit(editObj));
   };
 
   //view data
@@ -60,8 +79,9 @@ const Todo = () => {
   };
 
   // //handle edit
-  const handleEdit = (id) => {
-    dispatch(editTodo(id));
+  const handleEdit = (todo) => {
+    setEditFormVisibility(true);
+    setEditTodo(todo);
   };
 
   return (
@@ -71,50 +91,66 @@ const Todo = () => {
           <p>Todo App </p>
         </div>
         <div>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <input
-                className={styles.inputContainer}
-                name="myText"
-                type="text"
-                value={text.myText}
-                onChange={handleChange}
-                placeholder="Enter todos"
-              />
-              <button type="submit">
-                <BsPlusLg />
-              </button>
-            </div>
-          </form>
+          {editFormVisibility === false ? (
+            <form onSubmit={handleSubmit}>
+              <div>
+                <input
+                  className={styles.inputContainer}
+                  name="myText"
+                  type="text"
+                  value={text.myText}
+                  onChange={handleChange}
+                  placeholder="Enter todos"
+                />
+                <button type="submit">
+                  <BsPlusLg />
+                </button>
+              </div>
+            </form>
+          ) : (
+            <form onSubmit={editSubmit}>
+              <div>
+                <input
+                  className={styles.inputContainer}
+                  name="myText"
+                  type="text"
+                  value={editValue || ''}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  placeholder="Update todos"
+                />
+                <button type="submit">update</button>
+                <button type="button" onClick={cancelUpdate}>
+                  Back
+                </button>
+              </div>
+            </form>
+          )}
         </div>
         <div>
           {items.map((todo) => {
             return (
               <div key={todo.id} className={styles.listContainer}>
                 <ul>
-                  {/* <li>{todo.todoItem.myText}</li> */}
-                  <li>
-                    <input
-                      type="text"
-                      value={todo.todoItem.myText}
-                      onChange={(e) => e.preventDefault()}
-                    />
-                  </li>
+                  <li>{todo.todoItem.myText}</li>
                 </ul>
-                {/* delete */}
-                <button
-                  onClick={() => handleDelete(todo.id)}
-                  className={styles.deleteButton}
-                >
-                  <BiMinus />
-                </button>
-                {/* edit */}
-                <button
-                  onClick={() => handleEdit(todo)}
-                  className={styles.editButton}
-                >
-                  edit
-                </button>
+                <div>
+                  {editFormVisibility === false && (
+                    <>
+                      <button
+                        onClick={() => handleDelete(todo.id)}
+                        className={styles.deleteButton}
+                      >
+                        <BiMinus />
+                      </button>
+                      <button
+                        onClick={() => handleEdit(todo)}
+                        className={styles.editButton}
+                      >
+                        edit
+                      </button>
+                    </>
+                  )}
+                </div>
               </div>
             );
           })}
