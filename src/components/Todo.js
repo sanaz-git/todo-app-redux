@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { loadTodo, deleteTodo, editTodo } from '../redux/todo/todoAction';
+import {
+  loadTodo,
+  deleteTodo,
+  editTodo,
+  updateTodo,
+} from '../redux/todo/todoAction';
 import { TODO_KEY } from '../redux/todo/todoReducer';
 import { v4 } from 'uuid';
 import { BsPlusLg } from 'react-icons/bs';
@@ -16,6 +21,8 @@ const Todo = () => {
     myText: '',
   });
 
+  // const [editTodo, setEditTodo] = useState(null);
+
   //handle change
   const handleChange = (e) => {
     setText({
@@ -27,15 +34,19 @@ const Todo = () => {
   //handle onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(
-      loadTodo({
-        id: v4(),
-        todoItem: text,
-      }),
-    );
-    setText({
-      myText: '',
-    });
+    if (dispatch(editTodo())) {
+      dispatch(
+        loadTodo({
+          id: v4(),
+          todoItem: text,
+        }),
+      );
+      setText({
+        myText: '',
+      });
+    } else {
+      dispatch(updateTodo());
+    }
   };
 
   //view data
@@ -81,7 +92,14 @@ const Todo = () => {
             return (
               <div key={todo.id} className={styles.listContainer}>
                 <ul>
-                  <li>{todo.todoItem.myText}</li>
+                  {/* <li>{todo.todoItem.myText}</li> */}
+                  <li>
+                    <input
+                      type="text"
+                      value={todo.todoItem.myText}
+                      onChange={(e) => e.preventDefault()}
+                    />
+                  </li>
                 </ul>
                 {/* delete */}
                 <button
@@ -92,7 +110,7 @@ const Todo = () => {
                 </button>
                 {/* edit */}
                 <button
-                  onClick={() => handleEdit(todo.id)}
+                  onClick={() => handleEdit(todo)}
                   className={styles.editButton}
                 >
                   edit

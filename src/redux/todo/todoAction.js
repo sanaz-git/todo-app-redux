@@ -1,7 +1,15 @@
-import { LOAD_TODO, DELETE_TODO, EDIT_TODO } from './todo.actionTypes';
+import {
+  LOAD_TODO,
+  DELETE_TODO,
+  EDIT_TODO,
+  UPDATE_TODO,
+} from './todo.actionTypes';
 
 const loadTodo = (todos) => {
-  return { type: LOAD_TODO, payload: todos };
+  return {
+    type: LOAD_TODO,
+    payload: todos,
+  };
 };
 
 const deleteTodo = (id) => {
@@ -11,10 +19,18 @@ const deleteTodo = (id) => {
   };
 };
 
-const editTodo = (id) => {
+const editTodo = (todo, id) => {
   return {
     type: EDIT_TODO,
     payload: id,
+    title: todo,
   };
 };
-export { loadTodo, deleteTodo, editTodo };
+
+const updateTodo = (todo) => {
+  return {
+    type: UPDATE_TODO,
+    payload: todo,
+  };
+};
+export { loadTodo, deleteTodo, editTodo, updateTodo };
