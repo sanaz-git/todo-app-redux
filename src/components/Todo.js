@@ -16,9 +16,11 @@ const Todo = () => {
   //initialize dispatch
   const dispatch = useDispatch();
 
-  const [text, setText] = useState({
-    myText: '',
-  });
+  const [text, setText] = useState([
+    {
+      myText: '',
+    },
+  ]);
 
   const [editFormVisibility, setEditFormVisibility] = useState(false);
 
@@ -72,6 +74,7 @@ const Todo = () => {
   const items = useSelector((state) => {
     return state[TODO_KEY];
   });
+  console.log(items);
 
   //handle delete
   const handleDelete = (id) => {
