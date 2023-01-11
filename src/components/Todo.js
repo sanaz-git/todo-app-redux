@@ -9,6 +9,7 @@ import { TODO_KEY } from '../redux/todo/todoReducer';
 import { v4 } from 'uuid';
 import { BsPlusLg } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
+import { BiEditAlt } from 'react-icons/bi';
 
 import styles from './Todo.module.css';
 
@@ -101,7 +102,7 @@ const Todo = () => {
                   className={styles.inputContainer}
                   name="myText"
                   type="text"
-                  value={text.myText}
+                  value={text.myText || ''}
                   onChange={handleChange}
                   placeholder="Enter todos"
                 />
@@ -130,7 +131,7 @@ const Todo = () => {
           )}
         </div>
         <div>
-          {items.map((todo) => {
+          {Array.from(items).map((todo) => {
             return (
               <div key={todo.id} className={styles.listContainer}>
                 <ul>
@@ -149,7 +150,7 @@ const Todo = () => {
                         onClick={() => handleEdit(todo)}
                         className={styles.editButton}
                       >
-                        edit
+                        <BiEditAlt />
                       </button>
                     </>
                   )}

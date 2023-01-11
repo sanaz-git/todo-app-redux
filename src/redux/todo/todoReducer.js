@@ -18,12 +18,12 @@ export const todoReducers = (state = initialState, action) => {
       return newTodos;
 
     case UPDATE_TODO:
-      // let data = action.payload;
+      let data = action.payload;
       const updatedArray = [];
-      newTodos.foreach((item) => {
-        if (item.id === action.payload.id) {
-          item.id = action.payload.id;
-          item.todo = newTodos.todo;
+      state.foreach((item) => {
+        if (item.id === data.id) {
+          item.id = data.id;
+          item.todo = data.todo;
         }
         updatedArray.push(item);
       });
