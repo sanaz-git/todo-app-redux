@@ -62,8 +62,10 @@ const Todo = () => {
   //handle editSubmit
   const editSubmit = (e) => {
     e.preventDefault();
+    let date = new Date();
+    let time = date.getTime();
     let editObj = {
-      id: editTodo.id,
+      id: time,
       todo: editValue,
     };
     setEditTodo('');
