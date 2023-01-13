@@ -49,16 +49,14 @@ const Todo = () => {
   //handle onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(
-      loadTodo({
-        id: v4(),
-        todoItem: text,
-      }),
-    );
+    let inputSubmit = {
+      id: v4(),
+      todoItem: text,
+    };
     setText({
       myText: '',
     });
+    dispatch(loadTodo(inputSubmit));
   };
 
   //handle editSubmit
@@ -68,6 +66,7 @@ const Todo = () => {
       id: editTodo.id,
       todo: editValue,
     };
+    setEditTodo('');
     dispatch(handleEditSubmit(editObj));
   };
 

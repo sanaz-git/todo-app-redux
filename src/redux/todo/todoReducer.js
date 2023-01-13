@@ -5,22 +5,20 @@ export const TODO_KEY = 'todoStore';
 const initialState = [];
 
 export const todoReducers = (state = initialState, action) => {
-  let newTodos;
   switch (action.type) {
     case LOAD_TODO:
-      newTodos = [...state];
-      newTodos.push(action.payload);
-      return newTodos;
+      const addToArray = [...state];
+      addToArray.push(action.payload);
+      return addToArray;
 
     case DELETE_TODO:
-      newTodos = [...state];
-      newTodos = newTodos.filter((item) => item.id !== action.payload);
-      return newTodos;
+      const filteredTodos = state.filter((todo) => todo.id !== action.payload);
+      return filteredTodos;
 
     case UPDATE_TODO:
       let data = action.payload;
       const updatedArray = [];
-      state.foreach((item) => {
+      state.map((item) => {
         if (item.id === data.id) {
           item.id = data.id;
           item.todo = data.todo;
