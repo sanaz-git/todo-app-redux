@@ -10,6 +10,8 @@ import { v4 } from 'uuid';
 import { BsPlusLg } from 'react-icons/bs';
 import { BiMinus } from 'react-icons/bi';
 import { BiEditAlt } from 'react-icons/bi';
+import { FiRefreshCcw } from 'react-icons/fi';
+import { BsFillBackspaceReverseFill } from 'react-icons/bs';
 
 import styles from './Todo.module.css';
 
@@ -66,7 +68,6 @@ const Todo = () => {
       id: editTodo.id,
       todo: editValue,
     };
-    setEditValue('');
     dispatch(handleEditSubmit(editObj));
   };
 
@@ -121,9 +122,15 @@ const Todo = () => {
                   onChange={(e) => setEditValue(e.target.value)}
                   placeholder="Update todos"
                 />
-                <button type="submit">update</button>
-                <button type="button" onClick={cancelUpdate}>
-                  Back
+                <button type="submit">
+                  <FiRefreshCcw />
+                </button>
+                <button
+                  type="button"
+                  onClick={cancelUpdate}
+                  className={styles.cancelButton}
+                >
+                  <BsFillBackspaceReverseFill />
                 </button>
               </div>
             </form>
