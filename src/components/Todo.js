@@ -49,26 +49,25 @@ const Todo = () => {
   //handle onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
-    let inputSubmit = {
-      id: v4(),
-      todoItem: text,
-    };
+
+    dispatch(
+      loadTodo({
+        id: v4(),
+        todoItem: text,
+      }),
+    );
     setText({
       myText: '',
     });
-    dispatch(loadTodo(inputSubmit));
   };
 
   //handle editSubmit
   const editSubmit = (e) => {
     e.preventDefault();
-    let date = new Date();
-    let time = date.getTime();
     let editObj = {
-      id: time,
+      id: editTodo.id,
       todo: editValue,
     };
-    setEditTodo('');
     dispatch(handleEditSubmit(editObj));
   };
 
