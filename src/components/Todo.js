@@ -49,13 +49,11 @@ const Todo = () => {
   //handle onSubmit
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    dispatch(
-      loadTodo({
-        id: v4(),
-        todoItem: text,
-      }),
-    );
+    let inputObj = {
+      id: v4(),
+      todoItem: text,
+    };
+    dispatch(loadTodo(inputObj));
     setText({
       myText: '',
     });
@@ -68,6 +66,7 @@ const Todo = () => {
       id: editTodo.id,
       todo: editValue,
     };
+    setEditValue('');
     dispatch(handleEditSubmit(editObj));
   };
 
@@ -116,7 +115,6 @@ const Todo = () => {
               <div>
                 <input
                   className={styles.inputContainer}
-                  name="myText"
                   type="text"
                   value={editValue || ''}
                   onChange={(e) => setEditValue(e.target.value)}
@@ -131,7 +129,7 @@ const Todo = () => {
           )}
         </div>
         <div>
-          {Array.from(items).map((todo) => {
+          {items.map((todo) => {
             return (
               <div key={todo.id} className={styles.listContainer}>
                 <ul>

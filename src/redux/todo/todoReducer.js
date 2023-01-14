@@ -20,7 +20,7 @@ export const todoReducers = (state = initialState, action) => {
     case UPDATE_TODO:
       let data = action.payload;
       const updatedArray = [];
-      state.foreach((item) => {
+      state.map((item) => {
         if (item.id === data.id) {
           item.id = data.id;
           item.todo = data.todo;
