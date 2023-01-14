@@ -115,6 +115,7 @@ const Todo = () => {
               <div>
                 <input
                   className={styles.inputContainer}
+                  name="myText"
                   type="text"
                   value={editValue || ''}
                   onChange={(e) => setEditValue(e.target.value)}
