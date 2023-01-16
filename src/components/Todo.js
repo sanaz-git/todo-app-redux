@@ -95,9 +95,6 @@ const Todo = () => {
   const addToast = () => {
     toast.success('todo add successfully');
   };
-  // const deleteToast = () => {
-  //   toast.success('todo delete successfully');
-  // };
 
   return (
     <>

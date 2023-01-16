@@ -2,9 +2,7 @@ import { LOAD_TODO, DELETE_TODO, UPDATE_TODO } from './todo.actionTypes';
 
 export const TODO_KEY = 'todoStore';
 
-const initialState = {
-  lists: [],
-};
+const initialState = [];
 
 export const todoReducers = (state = initialState, action) => {
   switch (action.type) {
