@@ -1,5 +1,7 @@
 import './App.css';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //Components
 import Todo from './components/Todo';
@@ -12,6 +14,7 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <Todo />
+        <ToastContainer />
       </div>
     </Provider>
   );

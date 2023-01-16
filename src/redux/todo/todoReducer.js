@@ -2,7 +2,9 @@ import { LOAD_TODO, DELETE_TODO, UPDATE_TODO } from './todo.actionTypes';
 
 export const TODO_KEY = 'todoStore';
 
-const initialState = [];
+const initialState = {
+  lists: [],
+};
 
 export const todoReducers = (state = initialState, action) => {
   switch (action.type) {
@@ -18,7 +20,7 @@ export const todoReducers = (state = initialState, action) => {
     case UPDATE_TODO:
       let data = action.payload;
       const updatedArray = [];
-      state.map((item) => {
+      state.foreach((item) => {
         if (item.id === data.id) {
           item.id = data.id;
           item.todo = data.todo;

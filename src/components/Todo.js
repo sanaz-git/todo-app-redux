@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+
 import {
   loadTodo,
   deleteTodo,
@@ -56,6 +58,7 @@ const Todo = () => {
       todoItem: text,
     };
     dispatch(loadTodo(inputObj));
+
     setText({
       myText: '',
     });
@@ -88,6 +91,14 @@ const Todo = () => {
     setEditTodo(todo);
   };
 
+  //toast
+  const addToast = () => {
+    toast.success('todo add successfully');
+  };
+  // const deleteToast = () => {
+  //   toast.success('todo delete successfully');
+  // };
+
   return (
     <>
       <div className={styles.todoContainer}>
@@ -106,7 +117,7 @@ const Todo = () => {
                   onChange={handleChange}
                   placeholder="Enter todos"
                 />
-                <button type="submit">
+                <button type="submit" onClick={addToast}>
                   <BsPlusLg />
                 </button>
               </div>
@@ -137,7 +148,7 @@ const Todo = () => {
           )}
         </div>
         <div>
-          {items.map((todo) => {
+          {Array.from(items).map((todo) => {
             return (
               <div key={todo.id} className={styles.listContainer}>
                 <ul>
