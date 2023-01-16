@@ -16,17 +16,22 @@ export const todoReducers = (state = initialState, action) => {
       return filteredTodos;
 
     case UPDATE_TODO:
-      let data = action.payload;
-      const updatedArray = [];
-      state.map((item) => {
-        if (item.id === data.id) {
-          item.id = data.id;
-          item.todo = data.todo;
-        }
-        updatedArray.push(item);
-      });
-      return updatedArray;
+      // let data = action.payload;
+      // const updatedArray = [];
+      // state.map((item) => {
+      //   if (item.id === data.id) {
+      //     item.id = data.id;
+      //     item.todo = data.todo;
+      //   }
+      //   updatedArray.push(item);
+      // });
+      // return updatedArray;
 
+      const allData = [...state]
+      const selectedTodoIndex = state.findIndex(item => item.id === action.payload.id)
+      allData[selectedTodoIndex].todoItem.myText = action.payload.todo
+      return allData
+      
     default:
       return state;
   }
