@@ -72,6 +72,7 @@ const Todo = () => {
       todo: editValue,
     };
     dispatch(handleEditSubmit(editObj));
+    updateToast();
   };
 
   //view data
@@ -83,6 +84,7 @@ const Todo = () => {
   //handle delete
   const handleDelete = (id) => {
     dispatch(deleteTodo(id));
+    deleteToast();
   };
 
   // //handle edit
@@ -93,7 +95,13 @@ const Todo = () => {
 
   //toast
   const addToast = () => {
-    toast.success('todo add successfully');
+    toast.success('Todo Add Successfully');
+  };
+  const updateToast = () => {
+    toast.success('Todo Update Successfully');
+  };
+  const deleteToast = () => {
+    toast.info('Todo Done Successfully');
   };
 
   return (
